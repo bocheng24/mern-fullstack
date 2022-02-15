@@ -1,9 +1,10 @@
 const asyncHandler = require('express-async-handler')
+const Goal = require('../models/goalModel')
 
 const getGoals = asyncHandler(async (req, res) => {
-    res.status(200).json({
-        message: "GET"
-    })
+
+    const goals = await Goal.find()
+    res.status(200).json(goals)
 })
 
 const postGoal = asyncHandler(async (req, res) => {
@@ -14,11 +15,9 @@ const postGoal = asyncHandler(async (req, res) => {
 
     } else {
 
-        console.log(req.body.text)
+        const goal = await Goal.create({ text: req.body.text })
 
-        res.status(200).json({
-            message: "POST"
-        })
+        res.status(200).json(goal)
 
     }
 
