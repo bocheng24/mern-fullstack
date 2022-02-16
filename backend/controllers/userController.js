@@ -53,7 +53,32 @@ const signupUser = asyncHandler(async (req, res) => {
 })
 
 const signinUser = asyncHandler(async (req, res) => {
-    res.json({message: "sign in"})
+
+    const { email, password } = req.body
+
+    const user = await User.findOne({ email })
+    const passwordMatch = await bcrypt.compare(password, user.password)
+
+    if (user && passwordMatch) {
+
+        res.status(201).json({
+            _id: user.id,
+            username: user.username,
+            email: user.email
+        })
+
+    } else if (user && !passwordMatch) {
+        
+        res.status(400)
+        throw new Error('Invalid password')
+
+    } else {
+        
+        res.status(400)
+        throw new Error('User not found')
+        
+    }
+
 })
 
 const getMe = asyncHandler(async (req, res) => {
