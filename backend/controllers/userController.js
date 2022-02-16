@@ -3,6 +3,12 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const User = require('../models/userModel')
 
+const genToken = id => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: '30d',
+    })
+}
+
 const signupUser = asyncHandler(async (req, res) => {
     
     const { username, email, password } = req.body
@@ -42,7 +48,8 @@ const signupUser = asyncHandler(async (req, res) => {
         res.status(201).json({
             _id: user.id,
             username: user.username,
-            email: user.email
+            email: user.email,
+            token: genToken(user.id)
         })
     } else {
         res.status(400)
@@ -64,7 +71,8 @@ const signinUser = asyncHandler(async (req, res) => {
         res.status(201).json({
             _id: user.id,
             username: user.username,
-            email: user.email
+            email: user.email,
+            token: genToken(user.id)
         })
 
     } else if (user && !passwordMatch) {
@@ -76,7 +84,7 @@ const signinUser = asyncHandler(async (req, res) => {
         
         res.status(400)
         throw new Error('User not found')
-        
+
     }
 
 })

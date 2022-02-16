@@ -2,3 +2,4 @@
 - NODE_ENV = development
 - PORT = <port_number>
 - MONGO_URI = <MONGO_COMPASS_URI>
+- JWT_SECRET = <any_secrets>
