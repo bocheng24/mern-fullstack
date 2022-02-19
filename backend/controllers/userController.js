@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const User = require('../models/userModel')
 
+
 const genToken = id => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '30d',
@@ -90,7 +91,13 @@ const signinUser = asyncHandler(async (req, res) => {
 })
 
 const getMe = asyncHandler(async (req, res) => {
-    res.json({message: "Get me"})
+    const { _id, username, email } = await User.findById(req.user.id)
+
+    res.status(200).json({
+        id: _id,
+        username: username,
+        email: email
+    })
 })
 
 
