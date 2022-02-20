@@ -1,0 +1,17 @@
+.form__container {
+    margin-top: 45px;
+    width: 450px;
+    text-align: center;
+    background-color: #fff;
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+  }
+  
+  .form__container h1 {
+    margin-bottom: 35px;
+  }
+  
+  .form__textfield {
+    margin-bottom: 25px;
+  }

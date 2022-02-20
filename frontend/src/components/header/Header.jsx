@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import LoginIcon from '@mui/icons-material/Login';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 
@@ -7,19 +8,21 @@ import './Header.css'
 function Header() {
   return (
     <div className="header">
-        <div className="header__container">    
+        <div className="header__container">  
             <div className="header__left">
-                Goal Maker
-            </div>
+                <Link to="/" className="header__link">
+                    Goal Maker
+                </Link>
+            </div>  
             <div className="header__right">
-                <div>
+                <Link className="header__link" to="/signin">
                     <LoginIcon className="header__icon" />
                     Sign in
-                </div>
-                <div>
+                </Link>
+                <Link className="header__link" to="/signup">
                     <PersonAddAltIcon className="header__icon" />
                     Sign up
-                </div>
+                </Link>
             </div>
         </div>
     </div>
