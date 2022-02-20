@@ -25,17 +25,3 @@ body {
   height: calc(100vh - 74px);
   margin: 0 auto;
 }
-
-/* .form__container {
-  margin-top: 45px;
-  width: 450px;
-  text-align: center;
-}
-
-.form__container h1 {
-  margin-bottom: 35px;
-}
-
-.form__textfield {
-  margin-bottom: 25px;
-} */
