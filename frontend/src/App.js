@@ -5,9 +5,9 @@ import {
   Route
 } from 'react-router-dom'
 
-import Dashboard from './components/dashboard/dashboard'
-import Signin from './components/authentication/signin'
-import Signup from './components/authentication/signup'
+import Dashboard from './pages/dashboard'
+import Signin from './pages/signin'
+import Signup from './pages/signup'
 
 function App() {
   return (
