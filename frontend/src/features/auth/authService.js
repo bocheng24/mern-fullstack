@@ -8,10 +8,7 @@ const signupUser = async userData => {
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data))
     }
-
     return response.data
 }
 
-export default {
-    signupUser
-}
+export default signupUser

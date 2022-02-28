@@ -1,6 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'
 import Header from '../components/header/Header'
 import { TextField, Button } from '@mui/material';
+import { register, reset } from '../features/auth/authSlice';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import '../App.css'
 
@@ -15,11 +20,64 @@ function Signup() {
 
   const { username, email, password, confPassword } = formData
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(state => state.auth)
+
+  useEffect(() => {
+    if (isError) {
+
+      console.log(message)
+      toast.error(message)
+
+    }
+
+    if(isSuccess || user) {
+      navigate('/')
+    }
+
+    dispatch(reset())
+
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
   const handleOnChange = e => {
     setFormData(prev => ({
+
       ...prev,
       [e.target.name]: e.target.value
+
     }))
+  }
+
+  const handleOnSubmit = e => {
+    e.preventDefault()
+
+    if ( password !== confPassword ) {
+      
+      toast.error('Passwords do not match')
+
+    } else {
+      
+      const userData = {
+        username,
+        email,
+        password
+      }
+
+      dispatch(register(userData))
+
+    }
+  }
+
+  if (isLoading) {
+    return (
+      
+      <div style={ {display: 'flex', justifyContent: 'center', alignItems: 'center'} }>
+        <CircularProgress />
+      </div>
+
+    )
   }
 
   return (
@@ -28,7 +86,7 @@ function Signup() {
       <div className="container">
         <div className="form__container">
           <h1>Sign up an account</h1>
-          <form>
+          <form onSubmit={ handleOnSubmit }>
             <TextField 
               fullWidth
               label="Enter your username"
