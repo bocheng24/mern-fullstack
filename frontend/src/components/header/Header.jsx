@@ -19,7 +19,7 @@ function Header() {
       console.log('sign out')
       dispatch(signout())
       dispatch(reset())
-      navigate('/signin')
+      navigate('/')
   }
   
   return (
