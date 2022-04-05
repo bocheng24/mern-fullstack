@@ -24,4 +24,5 @@ body {
   align-items: center;
   height: calc(100vh - 74px);
   margin: 0 auto;
+  margin-top: 75px;
 }
